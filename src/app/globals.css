@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* Colors from Tokyo Skytree official site */
+  --color-skytree-black: #0a0a0a;
+  --color-skytree-dark: #1a1a1a;
+  --color-skytree-charcoal: #2d2d2d;
+  --color-skytree-gray: #6b6b6b;
+  --color-skytree-light-gray: #999999;
+  --color-skytree-border: #e0e0e0;
+  --color-skytree-light: #f5f5f5;
+  --color-skytree-white: #ffffff;
+  --color-skytree-gold: #c8a96e;
+  --color-skytree-gold-light: #d4bc8b;
+  --color-skytree-accent: #b8944f;
+  --color-skytree-blue: #4a7fb5;
+  --color-skytree-blue-dark: #2d5a8e;
+
+  /* Typography */
+  --font-serif: "Georgia", "Times New Roman", serif;
+  --font-sans: "Helvetica Neue", Arial, sans-serif;
+
+  /* Spacing */
+  --spacing-section: 6rem;
+  --spacing-container: 1200px;
+
+  /* Border radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.08);
+  --shadow-card-hover: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
+}
+
+body {
+  background: var(--color-skytree-white);
+  color: var(--color-skytree-black);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-skytree-light-gray);
+  border-radius: 3px;
+}
+
+@keyframes towerPulse {
+  0%, 100% {
+    transform: scale(0.96);
+    opacity: 0.72;
+  }
+  50% {
+    transform: scale(1.04);
+    opacity: 1;
+  }
+}
+
+.tower-ring-pulse {
+  animation: towerPulse 2.6s ease-in-out infinite;
+}
+
+#floor-450,
+#floor-350,
+#floor-345,
+#floor-340 {
+  scroll-margin-top: 7rem;
+}
