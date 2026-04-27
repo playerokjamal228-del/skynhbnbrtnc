@@ -107,6 +107,11 @@ interface TicketCopy {
     genderRequired: string;
     birthdayRequired: string;
     countryRequired: string;
+    addressRequired: string;
+    cityRequired: string;
+    stateRequired: string;
+    postcodeRequired: string;
+    phoneRequired: string;
     termsRequired: string;
   };
   success: {
@@ -147,14 +152,24 @@ interface TicketCopy {
     lastName: string;
     firstName: string;
     email: string;
+    phone: string;
     gender: string;
     birthday: string;
     country: string;
+    address1: string;
+    city: string;
+    state: string;
+    postcode: string;
     countryPlaceholder: string;
     placeholders: {
       lastName: string;
       firstName: string;
       email: string;
+      phone: string;
+      address1: string;
+      city: string;
+      state: string;
+      postcode: string;
     };
     genders: Array<{ value: string; label: string }>;
   };
@@ -1432,6 +1447,11 @@ const content: Record<Locale, LocalizedContent> = {
         genderRequired: "Please select gender",
         birthdayRequired: "Date of birth is required",
         countryRequired: "Please select a country",
+        addressRequired: "Street address is required",
+        cityRequired: "City is required",
+        stateRequired: "State or region is required",
+        postcodeRequired: "ZIP or postal code is required",
+        phoneRequired: "Phone number is required",
         termsRequired: "Please accept the terms before completing your booking",
       },
       success: {
@@ -1484,14 +1504,24 @@ const content: Record<Locale, LocalizedContent> = {
         lastName: "Last Name",
         firstName: "First Name",
         email: "Email Address",
+        phone: "Phone Number",
         gender: "Gender",
         birthday: "Date of Birth",
         country: "Country",
+        address1: "Street Address",
+        city: "City",
+        state: "State / Region",
+        postcode: "ZIP / Postal Code",
         countryPlaceholder: "Select your country",
         placeholders: {
           lastName: "Smith",
           firstName: "John",
           email: "john@example.com",
+          phone: "+1 555 123 4567",
+          address1: "123 Main Street",
+          city: "New York",
+          state: "NY",
+          postcode: "10001",
         },
         genders: [
           { value: "male", label: "Male" },
@@ -1867,6 +1897,11 @@ content.ja = {
       genderRequired: "性別を選択してください",
       birthdayRequired: "生年月日を入力してください",
       countryRequired: "国・地域を選択してください",
+      addressRequired: "住所を入力してください",
+      cityRequired: "市区町村を入力してください",
+      stateRequired: "都道府県を入力してください",
+      postcodeRequired: "郵便番号を入力してください",
+      phoneRequired: "電話番号を入力してください",
       termsRequired: "予約完了前に規約への同意が必要です",
     },
     success: {
@@ -1914,14 +1949,24 @@ content.ja = {
       lastName: "姓",
       firstName: "名",
       email: "メールアドレス",
+      phone: "電話番号",
       gender: "性別",
       birthday: "生年月日",
       country: "国・地域",
+      address1: "住所",
+      city: "市区町村",
+      state: "都道府県",
+      postcode: "郵便番号",
       countryPlaceholder: "国・地域を選択",
       placeholders: {
         lastName: "山田",
         firstName: "太郎",
         email: "example@email.com",
+        phone: "09012345678",
+        address1: "押上一丁目1-2",
+        city: "墨田区",
+        state: "東京都",
+        postcode: "131-0045",
       },
       genders: [
         { value: "male", label: "男性" },
@@ -2110,6 +2155,11 @@ content.ko = {
       genderRequired: "성별을 선택하세요",
       birthdayRequired: "생년월일을 입력하세요",
       countryRequired: "국가를 선택하세요",
+      addressRequired: "주소를 입력하세요",
+      cityRequired: "도시를 입력하세요",
+      stateRequired: "주 또는 지역을 입력하세요",
+      postcodeRequired: "우편번호를 입력하세요",
+      phoneRequired: "전화번호를 입력하세요",
       termsRequired: "예약 완료 전에 약관에 동의해 주세요",
     },
     success: {
@@ -2152,11 +2202,25 @@ content.ko = {
       lastName: "성",
       firstName: "이름",
       email: "이메일 주소",
+      phone: "전화번호",
       gender: "성별",
       birthday: "생년월일",
       country: "국가",
+      address1: "주소",
+      city: "도시",
+      state: "주 / 지역",
+      postcode: "우편번호",
       countryPlaceholder: "국가를 선택하세요",
-      placeholders: { lastName: "Kim", firstName: "Minjun", email: "example@email.com" },
+      placeholders: {
+        lastName: "Kim",
+        firstName: "Minjun",
+        email: "example@email.com",
+        phone: "01012345678",
+        address1: "1-1-2 Oshiage",
+        city: "Sumida-ku",
+        state: "Tokyo",
+        postcode: "131-0045",
+      },
       genders: [
         { value: "male", label: "남성" },
         { value: "female", label: "여성" },
@@ -2324,6 +2388,11 @@ content["zh-CN"] = {
       genderRequired: "请选择性别",
       birthdayRequired: "请输入出生日期",
       countryRequired: "请选择国家或地区",
+      addressRequired: "请输入街道地址",
+      cityRequired: "请输入城市",
+      stateRequired: "请输入省份或地区",
+      postcodeRequired: "请输入邮编",
+      phoneRequired: "请输入电话号码",
       termsRequired: "完成预订前请先同意条款",
     },
     success: { title: "预订成功", reference: "预约编号", keepReference: "请保存此编号，并在到访当天于售票柜台出示。" },
@@ -2354,11 +2423,25 @@ content["zh-CN"] = {
       lastName: "姓",
       firstName: "名",
       email: "电子邮箱",
+      phone: "电话号码",
       gender: "性别",
       birthday: "出生日期",
       country: "国家/地区",
+      address1: "街道地址",
+      city: "城市",
+      state: "省份 / 地区",
+      postcode: "邮编",
       countryPlaceholder: "请选择国家/地区",
-      placeholders: { lastName: "Wang", firstName: "Lei", email: "example@email.com" },
+      placeholders: {
+        lastName: "Wang",
+        firstName: "Lei",
+        email: "example@email.com",
+        phone: "13800138000",
+        address1: "押上1-1-2",
+        city: "墨田区",
+        state: "东京都",
+        postcode: "131-0045",
+      },
       genders: [
         { value: "male", label: "男" },
         { value: "female", label: "女" },
@@ -2490,11 +2573,25 @@ content["zh-TW"] = {
       lastName: "姓",
       firstName: "名",
       email: "電子郵件",
+      phone: "電話號碼",
       gender: "性別",
       birthday: "出生日期",
       country: "國家/地區",
+      address1: "街道地址",
+      city: "城市",
+      state: "省份 / 地區",
+      postcode: "郵遞區號",
       countryPlaceholder: "請選擇國家/地區",
-      placeholders: { lastName: "Wang", firstName: "Lei", email: "example@email.com" },
+      placeholders: {
+        lastName: "Wang",
+        firstName: "Lei",
+        email: "example@email.com",
+        phone: "0912345678",
+        address1: "押上1-1-2",
+        city: "墨田區",
+        state: "東京都",
+        postcode: "131-0045",
+      },
       genders: [
         { value: "male", label: "男" },
         { value: "female", label: "女" },
@@ -2614,6 +2711,11 @@ content.th = {
       genderRequired: "กรุณาเลือกเพศ",
       birthdayRequired: "กรุณากรอกวันเกิด",
       countryRequired: "กรุณาเลือกประเทศ",
+      addressRequired: "กรุณากรอกที่อยู่",
+      cityRequired: "กรุณากรอกเมือง",
+      stateRequired: "กรุณากรอกรัฐหรือภูมิภาค",
+      postcodeRequired: "กรุณากรอกรหัสไปรษณีย์",
+      phoneRequired: "กรุณากรอกหมายเลขโทรศัพท์",
       termsRequired: "กรุณายอมรับเงื่อนไขก่อนยืนยันการจอง",
     },
     success: { title: "ยืนยันการจองแล้ว", reference: "หมายเลขอ้างอิง", keepReference: "โปรดเก็บหมายเลขนี้ไว้และแสดงที่เคาน์เตอร์บัตรในวันเข้าชม" },
@@ -2635,11 +2737,25 @@ content.th = {
       lastName: "นามสกุล",
       firstName: "ชื่อ",
       email: "อีเมล",
+      phone: "หมายเลขโทรศัพท์",
       gender: "เพศ",
       birthday: "วันเกิด",
       country: "ประเทศ",
+      address1: "ที่อยู่",
+      city: "เมือง",
+      state: "รัฐ / ภูมิภาค",
+      postcode: "รหัสไปรษณีย์",
       countryPlaceholder: "เลือกประเทศ",
-      placeholders: { lastName: "Somsak", firstName: "Anan", email: "example@email.com" },
+      placeholders: {
+        lastName: "Somsak",
+        firstName: "Anan",
+        email: "example@email.com",
+        phone: "0812345678",
+        address1: "1-1-2 Oshiage",
+        city: "Sumida",
+        state: "Tokyo",
+        postcode: "131-0045",
+      },
       genders: [
         { value: "male", label: "ชาย" },
         { value: "female", label: "หญิง" },
@@ -2722,4 +2838,3 @@ export function getEventCategoryLabel(locale: Locale, value: string) {
 export function getEventBadgeLabel(locale: Locale, value: string) {
   return getLocalizedContent(locale).events.badges[value] ?? value;
 }
-

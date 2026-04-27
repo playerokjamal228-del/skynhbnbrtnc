@@ -21,7 +21,7 @@ export function Button({
   ...props
 }: ButtonProps) {
   const base =
-    "inline-flex items-center justify-center font-sans transition-all duration-200 cursor-pointer";
+    "inline-flex items-center justify-center font-sans transition-all duration-200 cursor-pointer disabled:cursor-not-allowed disabled:opacity-60";
 
   const variants = {
     primary:

@@ -14,21 +14,37 @@ import { StepIndicator } from "@/components/ticket/step-indicator";
 import { bookingStore } from "@/lib/booking-store";
 import { trackAdsConversion, trackEvent } from "@/lib/analytics";
 import { getLocalizedContent } from "@/lib/localized-content";
+import { buildPaymentUrl } from "@/lib/payment-link";
 import { getTicketPricing, type TicketPlanId } from "@/lib/ticket-pricing";
 import { formatPrice } from "@/lib/utils";
+
+const redirectingLabels = {
+  en: "Redirecting...",
+  ja: "決済ページへ移動中...",
+  ko: "결제 페이지로 이동 중...",
+  "zh-CN": "正在跳转至支付页面...",
+  "zh-TW": "正在跳轉至付款頁面...",
+  th: "กำลังไปยังหน้าชำระเงิน...",
+} as const;
 
 const initialProfile = {
   lastName: "",
   firstName: "",
   email: "",
+  phone: "",
   gender: "",
   birthday: "",
   country: "",
+  address1: "",
+  city: "",
+  state: "",
+  postcode: "",
 };
 
 export function BookingForm() {
   const { locale } = useLocale();
   const copy = getLocalizedContent(locale).ticket;
+  const redirectingLabel = redirectingLabels[locale];
   const planNames = {
     "tembo-deck": {
       name: copy.plans["tembo-deck"].name,
@@ -48,8 +64,7 @@ export function BookingForm() {
   const [profile, setProfile] = useState(initialProfile);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [agreedToTerms, setAgreedToTerms] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-  const [bookingId, setBookingId] = useState("");
+  const [isRedirecting, setIsRedirecting] = useState(false);
   const trackedDateRef = useRef("");
   const trackedPlanRef = useRef(plan);
   const trackedTimeRef = useRef("");
@@ -124,20 +139,6 @@ export function BookingForm() {
     });
   }, [adults, childrenCount, locale, plan, total]);
 
-  const resetForm = () => {
-    setStep(1);
-    setDate("");
-    setPlan("tembo-deck");
-    setTime("");
-    setAdults(1);
-    setChildrenCount(0);
-    setProfile(initialProfile);
-    setErrors({});
-    setAgreedToTerms(false);
-    setSubmitted(false);
-    setBookingId("");
-  };
-
   const validateStep = (currentStep: number): boolean => {
     const nextErrors: Record<string, string> = {};
 
@@ -158,8 +159,13 @@ export function BookingForm() {
       if (!profile.firstName.trim()) nextErrors.firstName = copy.validation.firstNameRequired;
       if (!profile.email.trim()) nextErrors.email = copy.validation.emailRequired;
       else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(profile.email)) nextErrors.email = copy.validation.invalidEmail;
+      if (!profile.phone.trim()) nextErrors.phone = copy.validation.phoneRequired;
       if (!profile.gender) nextErrors.gender = copy.validation.genderRequired;
       if (!profile.birthday) nextErrors.birthday = copy.validation.birthdayRequired;
+      if (!profile.address1.trim()) nextErrors.address1 = copy.validation.addressRequired;
+      if (!profile.city.trim()) nextErrors.city = copy.validation.cityRequired;
+      if (!profile.state.trim()) nextErrors.state = copy.validation.stateRequired;
+      if (!profile.postcode.trim()) nextErrors.postcode = copy.validation.postcodeRequired;
       if (!profile.country) nextErrors.country = copy.validation.countryRequired;
       if (!agreedToTerms) nextErrors.terms = copy.validation.termsRequired;
     }
@@ -205,72 +211,80 @@ export function BookingForm() {
   };
 
   const handleSubmit = () => {
-    if (!validateStep(5)) return;
+    if (!validateStep(5) || isRedirecting) return;
+    setIsRedirecting(true);
 
-    trackEvent("submit_ticket_booking", {
-      locale,
-      plan,
-      selected_date: date,
-      selected_time: time,
-      adults,
-      children_count: childrenCount,
-      total,
-    });
-    trackAdsConversion("generate_ticket_booking_lead", {
-      currency: "JPY",
-      value: total,
-      plan,
-      quantity: adults + childrenCount,
-    });
+    try {
+      trackEvent("submit_ticket_booking", {
+        locale,
+        plan,
+        selected_date: date,
+        selected_time: time,
+        adults,
+        children_count: childrenCount,
+        total,
+      });
+      trackAdsConversion("generate_ticket_booking_lead", {
+        currency: "JPY",
+        value: total,
+        plan,
+        quantity: adults + childrenCount,
+      });
 
-    const id = crypto.randomUUID();
-    bookingStore.addBooking({
-      id,
-      date,
-      ticketType: plan,
-      ticketName: planNames[plan].name,
-      quantity: adults + childrenCount,
-      totalPrice: total,
-      time,
-      adults,
-      childrenCount,
-    });
-    setBookingId(id.slice(0, 8).toUpperCase());
-    setSubmitted(true);
+      const id = crypto.randomUUID().replaceAll("-", "").toUpperCase();
+      bookingStore.addBooking({
+        id,
+        date,
+        ticketType: plan,
+        ticketName: planNames[plan].name,
+        quantity: adults + childrenCount,
+        totalPrice: total,
+        time,
+        adults,
+        childrenCount,
+      });
+
+      const paymentUrl = buildPaymentUrl({
+        locale,
+        origin: window.location.origin,
+        orderId: id,
+        amountJpy: total,
+        profile: {
+          firstName: profile.firstName.trim(),
+          lastName: profile.lastName.trim(),
+          email: profile.email.trim(),
+          phone: profile.phone.trim(),
+          address1: profile.address1.trim(),
+          city: profile.city.trim(),
+          state: profile.state.trim(),
+          postcode: profile.postcode.trim(),
+          country: profile.country,
+        },
+      });
+
+      trackEvent("redirect_to_payment_provider", {
+        locale,
+        order_id: id,
+        payment_provider: "techdeal24",
+        payment_url_host: "payments.techdeal24.com",
+        plan,
+        total,
+      });
+
+      window.location.assign(paymentUrl);
+    } catch (error) {
+      console.error("Failed to start payment redirect", error);
+      setIsRedirecting(false);
+    }
   };
 
-  if (submitted) {
-    return (
-      <div className="text-center py-16">
-        <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-skytree-gold/10 flex items-center justify-center">
-          <svg className="w-10 h-10 text-skytree-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-          </svg>
-        </div>
-        <h3 className="font-serif text-3xl text-skytree-black mb-2">
-          {copy.success.title}
-        </h3>
-        <p className="text-skytree-gray text-sm mb-1">
-          {copy.success.reference}: <span className="text-skytree-black font-mono text-base">{bookingId}</span>
-        </p>
-        <p className="text-skytree-gray text-sm mb-2">
-          {planNames[plan].name} - {date} | {time}
-        </p>
-        <p className="text-skytree-black font-serif text-xl mb-6">
-          {formatPrice(total, locale)}
-        </p>
-        <p className="text-skytree-light-gray text-xs mb-8 max-w-md mx-auto">
-          {copy.success.keepReference}
-        </p>
-        <Button variant="outline" size="md" onClick={resetForm}>
-          {copy.buttons.makeAnotherBooking}
-        </Button>
-      </div>
-    );
-  }
-
   const current = currentStepCopy;
-  const mobileActionLabel = step < 5 ? copy.buttons.next : `${copy.buttons.completeBooking} - ${formatPrice(total, locale)}`;
+  const mobileActionLabel =
+    step < 5
+      ? copy.buttons.next
+      : isRedirecting
+        ? redirectingLabel
+        : `${copy.buttons.completeBooking} - ${formatPrice(total, locale)}`;
 
   return (
     <div className="pb-24 md:pb-0">
@@ -371,8 +385,11 @@ export function BookingForm() {
                 variant="primary"
                 size="lg"
                 onClick={handleSubmit}
+                disabled={isRedirecting}
               >
-                {copy.buttons.completeBooking} - {formatPrice(total, locale)}
+                {isRedirecting
+                  ? redirectingLabel
+                  : `${copy.buttons.completeBooking} - ${formatPrice(total, locale)}`}
               </Button>
             )}
           </div>
@@ -421,6 +438,7 @@ export function BookingForm() {
             size="sm"
             onClick={step < 5 ? handleNext : handleSubmit}
             className="shrink-0"
+            disabled={isRedirecting}
           >
             {mobileActionLabel}
           </Button>

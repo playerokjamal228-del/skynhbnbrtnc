@@ -10,9 +10,14 @@ interface ProfileFormProps {
     lastName: string;
     firstName: string;
     email: string;
+    phone: string;
     gender: string;
     birthday: string;
     country: string;
+    address1: string;
+    city: string;
+    state: string;
+    postcode: string;
   };
   onChange: (field: string, value: string) => void;
   errors: Record<string, string>;
@@ -111,6 +116,22 @@ export function ProfileForm({ profile, onChange, errors }: ProfileFormProps) {
 
       <div>
         <label className="block text-xs tracking-wider uppercase text-skytree-gray mb-1.5">
+          {copy.phone} <span className="text-red-500">*</span>
+        </label>
+        <input
+          type="tel"
+          value={profile.phone}
+          onChange={(e) => onChange("phone", e.target.value)}
+          className={inputClass("phone")}
+          placeholder={copy.placeholders.phone}
+        />
+        {errors.phone && (
+          <p className="text-red-500 text-xs mt-1">{errors.phone}</p>
+        )}
+      </div>
+
+      <div>
+        <label className="block text-xs tracking-wider uppercase text-skytree-gray mb-1.5">
           {copy.gender} <span className="text-red-500">*</span>
         </label>
         <div className="flex gap-4">
@@ -152,6 +173,71 @@ export function ProfileForm({ profile, onChange, errors }: ProfileFormProps) {
 
       <div>
         <label className="block text-xs tracking-wider uppercase text-skytree-gray mb-1.5">
+          {copy.address1} <span className="text-red-500">*</span>
+        </label>
+        <input
+          type="text"
+          value={profile.address1}
+          onChange={(e) => onChange("address1", e.target.value)}
+          className={inputClass("address1")}
+          placeholder={copy.placeholders.address1}
+        />
+        {errors.address1 && (
+          <p className="text-red-500 text-xs mt-1">{errors.address1}</p>
+        )}
+      </div>
+
+      <div className="grid grid-cols-2 gap-4">
+        <div>
+          <label className="block text-xs tracking-wider uppercase text-skytree-gray mb-1.5">
+            {copy.city} <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="text"
+            value={profile.city}
+            onChange={(e) => onChange("city", e.target.value)}
+            className={inputClass("city")}
+            placeholder={copy.placeholders.city}
+          />
+          {errors.city && (
+            <p className="text-red-500 text-xs mt-1">{errors.city}</p>
+          )}
+        </div>
+        <div>
+          <label className="block text-xs tracking-wider uppercase text-skytree-gray mb-1.5">
+            {copy.state} <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="text"
+            value={profile.state}
+            onChange={(e) => onChange("state", e.target.value)}
+            className={inputClass("state")}
+            placeholder={copy.placeholders.state}
+          />
+          {errors.state && (
+            <p className="text-red-500 text-xs mt-1">{errors.state}</p>
+          )}
+        </div>
+      </div>
+
+      <div>
+        <label className="block text-xs tracking-wider uppercase text-skytree-gray mb-1.5">
+          {copy.postcode} <span className="text-red-500">*</span>
+        </label>
+        <input
+          type="text"
+          value={profile.postcode}
+          onChange={(e) => onChange("postcode", e.target.value)}
+          className={inputClass("postcode")}
+          placeholder={copy.placeholders.postcode}
+        />
+        {errors.postcode && (
+          <p className="text-red-500 text-xs mt-1">{errors.postcode}</p>
+        )}
+      </div>
+
+      <div>
+        <label className="block text-xs tracking-wider uppercase text-skytree-gray mb-1.5">
           {copy.country} <span className="text-red-500">*</span>
         </label>
         <select
@@ -161,7 +247,7 @@ export function ProfileForm({ profile, onChange, errors }: ProfileFormProps) {
         >
           <option value="">{copy.countryPlaceholder}</option>
           {countryNames.map((country) => (
-            <option key={country.code} value={country.label}>
+            <option key={country.code} value={country.code}>
               {country.label}
             </option>
           ))}
