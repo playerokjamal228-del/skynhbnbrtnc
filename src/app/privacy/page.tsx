@@ -11,6 +11,9 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: copy.metadataTitle,
     description: copy.metadataDescription,
+    alternates: {
+      canonical: "/privacy",
+    },
   };
 }
 

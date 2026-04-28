@@ -660,24 +660,24 @@ const en = {
     subtitle: "Project Overview & Public Information",
     cards: [
       {
-        title: "Facility Profile",
-        body: "Tokyo Skytree combines broadcasting infrastructure, observation facilities, dining, retail, and visitor circulation in one integrated landmark destination in Sumida, Tokyo.",
+        title: "Site Profile",
+        body: "Skytree Tickets is an independent visitor booking and planning website focused on Tokyo Skytree admission guidance, observatory navigation, access planning, and multilingual visitor support.",
       },
       {
-        title: "Operator & Public Guidance",
-        body: "Public visitor guidance is published across Tickets, Opening Hours, Floor Guide, Access, FAQ, Privacy, and Terms so guests can confirm admission, movement, and site policies before arriving.",
+        title: "Booking & Visitor Guidance",
+        body: "Public guidance is organized across Tickets, Opening Hours, Floor Guide, Access, FAQ, Privacy, and Terms so guests can review entry options, movement, and site policies before purchase or arrival.",
       },
       {
-        title: "Media, Policy, and Reference",
-        body: "This section consolidates the public-facing summary for the tower, including facility context, legal references, visitor policy links, and the primary information desk used across the site.",
+        title: "Reference & Policy Layer",
+        body: "The site consolidates venue-reference context, visitor-facing summaries, legal notices, and policy links under the skytree-tickets.com domain for a more consistent booking journey.",
       },
     ],
-    factsTitle: "Facility Snapshot",
+    factsTitle: "Site Snapshot",
     facts: [
-      { label: "Tower Height", value: "634 m" },
-      { label: "Location", value: "1-1-2 Oshiage, Sumida-ku, Tokyo" },
-      { label: "Public Opening", value: "May 22, 2012" },
-      { label: "Main Uses", value: "Broadcasting, observatory, dining, retail" },
+      { label: "Primary Domain", value: "skytree-tickets.com" },
+      { label: "Redirect Domain", value: "tokyo.skytree-tickets.com" },
+      { label: "Coverage", value: "Tickets, access, floors, events, legal" },
+      { label: "Reference Venue", value: "Tokyo Skytree, Sumida-ku, Tokyo" },
     ],
     sectionTitle: "Public Information at a Glance",
     links: [
@@ -690,7 +690,7 @@ const en = {
     ],
     contactTitle: "Contact",
     contactBody:
-      "For visitor policies, admission planning, access questions, or public information related to the tower, please use the linked guidance pages first and contact the information desk by phone during service hours for live assistance.",
+      "For privacy requests, booking-flow questions, access planning, or public information related to the site, please use the linked guidance pages first and then contact the support channels listed in FAQ during service hours.",
   } satisfies CorporateCopy,
   faq: {
     title: "Frequently Asked Questions",

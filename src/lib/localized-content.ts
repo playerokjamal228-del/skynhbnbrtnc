@@ -82,10 +82,23 @@ interface TicketCopy {
       eyebrow: string;
       title: string;
       description: string;
+      startingFromLabel: string;
+      valueBullets: string[];
       primaryCta: string;
       secondaryCta: string;
       trustBadges: string[];
-      highlights: Array<{ label: string; value: string; copy: string }>;
+      planCards: Array<{
+        planId: "tembo-deck" | "tembo-deck-galleria";
+        label: string;
+        summary: string;
+        points: string[];
+      }>;
+      offerPanel: {
+        eyebrow: string;
+        title: string;
+        priceNote: string;
+        bullets: string[];
+      };
     };
   };
   steps: string[];
@@ -1396,30 +1409,54 @@ const content: Record<Locale, LocalizedContent> = {
         title: "Book Your Tickets",
         subtitle: "Tembo Deck & Tembo Galleria",
         promo: {
-          eyebrow: "Tokyo Skytree admission",
-          title: "Book admission to Tembo Deck and Tembo Galleria",
+          eyebrow: "Tokyo Skytree tickets",
+          title: "Book Tokyo Skytree tickets with a low entry price",
           description:
-            "Choose your date, ticket plan, and entry time for the main Tokyo Skytree observatory route. The booking flow is designed to keep planning clear on both desktop and mobile.",
+            "Start with Tembo Deck at 350m, then decide if you want to upgrade to the full skyline route with Tembo Galleria. Pick your date and entry time before checkout.",
+          startingFromLabel: "Adult weekday admission starts from",
+          valueBullets: [
+            "Low-friction entry point for first-time visitors who want the core observatory view.",
+            "Tembo Deck covers the main 350m experience with panoramic windows, glass floor, and theater access.",
+            "Upgrade to the combined Deck + Galleria route if you want the higher 450m walk above the city.",
+          ],
           primaryCta: "Book Tickets",
           secondaryCta: "See Floor Guide",
-          trustBadges: ["From $14.67", "Select date & time", "Deck & Galleria plans"],
-          highlights: [
+          trustBadges: ["From $14.67", "Tembo Deck 350m", "Optional 450m upgrade"],
+          planCards: [
             {
-              label: "Admission options",
-              value: "2 main plans",
-              copy: "Choose between Tembo Deck only or the combined route with Tembo Galleria.",
+              planId: "tembo-deck",
+              label: "Best entry price",
+              summary:
+                "The clearest starting point for most buyers who want the signature observatory experience without overcomplicating the choice.",
+              points: [
+                "Main observatory at 350m",
+                "Panoramic skyline windows plus glass floor highlights",
+                "Fastest way to lock in a Tokyo Skytree visit",
+              ],
             },
             {
-              label: "Booking flow",
-              value: "5 steps",
-              copy: "Select date, plan, time, number of visitors, and booking details.",
-            },
-            {
-              label: "Visit planning",
-              value: "Mobile-friendly",
-              copy: "The page is structured for quick comparison and easy booking on smaller screens.",
+              planId: "tembo-deck-galleria",
+              label: "Upgrade route",
+              summary:
+                "A stronger premium option for visitors who want both the 350m observatory and the upper Galleria route in one booking.",
+              points: [
+                "Includes Tembo Deck + Tembo Galleria",
+                "Upper 450m route for the fuller skyline experience",
+                "Best choice for a more complete visit",
+              ],
             },
           ],
+          offerPanel: {
+            eyebrow: "Starting fare",
+            title: "Upgrade available in the same flow",
+            priceNote:
+              "Adult weekday pricing for Tembo Deck is shown before checkout so visitors can start with the lowest barrier to purchase.",
+            bullets: [
+              "Choose your date and entry time before payment.",
+              "Compare the 350m deck ticket against the 350m + 450m route in one place.",
+              "Complete booking in a short, mobile-friendly checkout flow.",
+            ],
+          },
         },
       },
       steps: ["Date", "Plan", "Time", "People", "Visitor"],
@@ -1847,29 +1884,53 @@ content.ja = {
       subtitle: "天望デッキ・天望回廊",
       promo: {
         eyebrow: "東京スカイツリー入場予約",
-        title: "天望デッキ・天望回廊の入場チケット予約",
+        title: "東京スカイツリーのチケットを、まずは低い価格帯から予約",
         description:
-          "来場日、チケット種別、入場時間を選びながら、東京スカイツリーの主要な展望ルートをわかりやすく予約できる構成です。デスクトップでもモバイルでもスムーズに進められます。",
+          "まずは350mの天望デッキから始めて、必要なら天望回廊付きルートへアップグレードできます。来場日と入場時間を選んでから購入へ進めます。",
+        startingFromLabel: "平日大人料金は",
+        valueBullets: [
+          "最初の一枚として選びやすい、価格の入り口を明確にした構成です。",
+          "天望デッキでは350mの主要展望体験、ガラス床、シアター演出を楽しめます。",
+          "より高い眺望ルートを求める場合は、天望回廊付きプランへそのまま進めます。",
+        ],
         primaryCta: "チケットを予約",
         secondaryCta: "フロアガイドを見る",
-        trustBadges: ["JPY 2,200から", "日付・時間を選択", "デッキ・回廊プラン対応"],
-        highlights: [
+        trustBadges: ["JPY 2,200から", "天望デッキ 350m", "450mルートへアップグレード可"],
+        planCards: [
           {
-            label: "入場プラン",
-            value: "2種類",
-            copy: "天望デッキのみ、または天望回廊を含むルートから選べます。",
+            planId: "tembo-deck",
+            label: "まず選びやすい基本プラン",
+            summary:
+              "価格の入口を抑えつつ、東京スカイツリーらしい代表的な展望体験を押さえたい来場者に向いています。",
+            points: [
+              "350mの主要展望フロア",
+              "大きな眺望窓とガラス床の見どころ",
+              "まず予約を確定しやすい定番ルート",
+            ],
           },
           {
-            label: "予約の流れ",
-            value: "5ステップ",
-            copy: "日付、プラン、時間、人数、来場者情報の順に進みます。",
-          },
-          {
-            label: "来場準備",
-            value: "モバイル対応",
-            copy: "スマートフォンでも比較しやすく、予約を進めやすいレイアウトです。",
+            planId: "tembo-deck-galleria",
+            label: "上位ルートへ拡張",
+            summary:
+              "350mのデッキに加えて、より高い天望回廊まで含めたフルルートを一度の予約で確保したい方向けです。",
+            points: [
+              "天望デッキ + 天望回廊を含む",
+              "450mルートでより立体的な眺望体験",
+              "より充実した来場体験を求める方に最適",
+            ],
           },
         ],
+        offerPanel: {
+          eyebrow: "スタート価格",
+          title: "同じ予約フローで上位プランも比較できます",
+          priceNote:
+            "まずは平日大人の天望デッキ料金を明示し、購入ハードルを下げたうえで比較できる構成にしています。",
+          bullets: [
+            "決済前に来場日と入場時間を選択できます。",
+            "350mの基本プランと350m + 450mルートを同じ画面で比較できます。",
+            "短いモバイル対応フローで予約まで進めます。",
+          ],
+        },
       },
     },
     steps: ["日付", "プラン", "時間", "人数", "来場者"],
@@ -2110,29 +2171,53 @@ content.ko = {
       subtitle: "템보 데크 · 템보 갤러리아",
       promo: {
         eyebrow: "도쿄 스카이트리 입장 예약",
-        title: "템보 데크와 템보 갤러리아 입장권 예약",
+        title: "도쿄 스카이트리 티켓을 낮은 진입가부터 예약하세요",
         description:
-          "방문 날짜, 티켓 플랜, 입장 시간을 차례로 선택하며 도쿄 스카이트리의 주요 전망 동선을 간편하게 예약할 수 있도록 구성했습니다. 데스크톱과 모바일 모두에서 이해하기 쉽습니다.",
+          "먼저 350m 템보 데크로 시작하고, 원하면 템보 갤러리아가 포함된 상위 루트로 업그레이드할 수 있습니다. 방문 날짜와 입장 시간을 먼저 정하고 결제로 넘어갑니다.",
+        startingFromLabel: "평일 성인 입장권 시작가",
+        valueBullets: [
+          "처음 방문하는 이용자도 부담 없이 시작할 수 있는 낮은 진입가 중심 구성입니다.",
+          "템보 데크는 350m 메인 전망, 유리 바닥, 시어터 요소를 포함한 핵심 체험입니다.",
+          "더 높은 전망 동선을 원하면 템보 갤러리아 포함 플랜으로 바로 업그레이드할 수 있습니다.",
+        ],
         primaryCta: "티켓 예약",
         secondaryCta: "플로어 가이드 보기",
-        trustBadges: ["JPY 2,200부터", "날짜·시간 선택", "데크·갤러리아 플랜"],
-        highlights: [
+        trustBadges: ["JPY 2,200부터", "템보 데크 350m", "450m 업그레이드 가능"],
+        planCards: [
           {
-            label: "입장 플랜",
-            value: "2가지",
-            copy: "템보 데크 단독 또는 템보 갤러리아 포함 플랜 중에서 선택할 수 있습니다.",
+            planId: "tembo-deck",
+            label: "가장 부담 없는 시작점",
+            summary:
+              "복잡한 선택 없이 도쿄 스카이트리의 대표 전망 체험을 먼저 확보하고 싶은 방문객에게 적합합니다.",
+            points: [
+              "350m 메인 전망대",
+              "대형 파노라마 창과 유리 바닥 포인트",
+              "가장 빠르게 예약을 확정하기 좋은 기본 루트",
+            ],
           },
           {
-            label: "예약 흐름",
-            value: "5단계",
-            copy: "날짜, 플랜, 시간, 인원, 방문객 정보 순서로 진행됩니다.",
-          },
-          {
-            label: "방문 준비",
-            value: "모바일 대응",
-            copy: "스마트폰에서도 비교와 예약 진행이 편한 구조입니다.",
+            planId: "tembo-deck-galleria",
+            label: "상위 관람 루트",
+            summary:
+              "350m 전망대와 더 높은 갤러리아 동선을 한 번에 예약해 보다 완성도 높은 방문 경험을 만들고 싶은 경우에 적합합니다.",
+            points: [
+              "템보 데크 + 템보 갤러리아 포함",
+              "450m 상부 루트로 더 넓은 스카이라인 경험",
+              "더 풍부한 방문 경험을 원할 때 가장 좋은 선택",
+            ],
           },
         ],
+        offerPanel: {
+          eyebrow: "시작 가격",
+          title: "같은 흐름에서 업그레이드도 비교 가능",
+          priceNote:
+            "먼저 평일 성인 템보 데크 가격을 명확히 보여 주어 구매 장벽을 낮추고, 이후 상위 플랜까지 비교할 수 있게 구성했습니다.",
+          bullets: [
+            "결제 전에 방문 날짜와 입장 시간을 선택할 수 있습니다.",
+            "350m 기본권과 350m + 450m 루트를 한 화면에서 비교할 수 있습니다.",
+            "짧고 모바일 친화적인 체크아웃 흐름으로 바로 이어집니다.",
+          ],
+        },
       },
     },
     steps: ["날짜", "플랜", "시간", "인원", "방문객"],
@@ -2343,29 +2428,53 @@ content["zh-CN"] = {
       subtitle: "天望甲板与天望回廊",
       promo: {
         eyebrow: "东京晴空塔入场预订",
-        title: "预订天望甲板与天望回廊门票",
+        title: "从更低的入门价格开始预订东京晴空塔门票",
         description:
-          "按顺序选择到访日期、门票类型与入场时间，更清晰地完成东京晴空塔主要观景路线的预订流程，并兼顾桌面与移动端体验。",
+          "可先从 350m 的天望甲板开始，如有需要再升级到包含天望回廊的完整高空路线。先选日期与入场时间，再继续支付。",
+        startingFromLabel: "平日成人票起价",
+        valueBullets: [
+          "先用较低的购票门槛吸引首次到访用户进入转化流程。",
+          "天望甲板覆盖 350m 核心观景体验、玻璃地板与剧场亮点。",
+          "若想获得更完整的高空路线，可在同一流程中升级到天望回廊。",
+        ],
         primaryCta: "预订门票",
         secondaryCta: "查看楼层指南",
-        trustBadges: ["JPY 2,200 起", "可选日期与时间", "甲板与回廊票种"],
-        highlights: [
+        trustBadges: ["JPY 2,200 起", "天望甲板 350m", "可升级 450m 路线"],
+        planCards: [
           {
-            label: "入场方案",
-            value: "2 种主要票种",
-            copy: "可选择天望甲板单独入场，或包含天望回廊的完整路线。",
+            planId: "tembo-deck",
+            label: "更容易下单的起点",
+            summary:
+              "适合想先锁定东京晴空塔核心观景体验、又不想一开始就做复杂选择的访客。",
+            points: [
+              "350m 主观景层",
+              "大面积观景窗与玻璃地板亮点",
+              "最快进入预订决定的基础路线",
+            ],
           },
           {
-            label: "预订流程",
-            value: "5 个步骤",
-            copy: "日期、票种、时间、人数与访客信息依次完成。",
-          },
-          {
-            label: "行前准备",
-            value: "移动端友好",
-            copy: "在手机上也能更清晰地比较并继续预订。",
+            planId: "tembo-deck-galleria",
+            label: "更完整的升级路线",
+            summary:
+              "适合希望一次预约同时拿下 350m 与更高空回廊体验、提升整趟参观完整度的用户。",
+            points: [
+              "包含天望甲板 + 天望回廊",
+              "450m 更高视角的城市路线",
+              "更适合想要完整观景体验的访客",
+            ],
           },
         ],
+        offerPanel: {
+          eyebrow: "起步价格",
+          title: "同一流程内即可比较升级方案",
+          priceNote:
+            "先展示平日成人天望甲板价格，降低购买门槛，再让用户自然比较更高阶的观景路线。",
+          bullets: [
+            "付款前即可先选到访日期与入场时间。",
+            "在同一页面比较 350m 基础票与 350m + 450m 路线。",
+            "整个结账流程简短，移动端也便于继续完成预订。",
+          ],
+        },
       },
     },
     steps: ["日期", "票种", "时间", "人数", "游客"],
@@ -2529,29 +2638,53 @@ content["zh-TW"] = {
       subtitle: "天望甲板與天望回廊",
       promo: {
         eyebrow: "東京晴空塔入場預訂",
-        title: "預訂天望甲板與天望回廊門票",
+        title: "從更低的入門價格開始預訂東京晴空塔門票",
         description:
-          "依序選擇到訪日期、票種與入場時間，以更清楚的方式完成東京晴空塔主要觀景路線的預訂，並兼顧桌面與行動裝置體驗。",
+          "可先從 350m 的天望甲板開始，如有需要再升級至包含天望回廊的完整高空路線。先選日期與入場時間，再繼續付款。",
+        startingFromLabel: "平日成人票起價",
+        valueBullets: [
+          "先以較低門檻吸引首次到訪旅客進入購票流程。",
+          "天望甲板涵蓋 350m 核心觀景體驗、玻璃地板與劇場亮點。",
+          "若想要更完整的高空動線，可在同一流程中升級至天望回廊。",
+        ],
         primaryCta: "預訂門票",
         secondaryCta: "查看樓層指南",
-        trustBadges: ["JPY 2,200 起", "可選日期與時間", "甲板與回廊票種"],
-        highlights: [
+        trustBadges: ["JPY 2,200 起", "天望甲板 350m", "可升級 450m 路線"],
+        planCards: [
           {
-            label: "入場方案",
-            value: "2 種主要票種",
-            copy: "可選擇天望甲板單獨入場，或包含天望回廊的完整路線。",
+            planId: "tembo-deck",
+            label: "較容易下單的起點",
+            summary:
+              "適合想先鎖定東京晴空塔核心觀景體驗、又不想一開始做太多比較的訪客。",
+            points: [
+              "350m 主觀景樓層",
+              "大型觀景窗與玻璃地板亮點",
+              "最快做出購票決策的基礎路線",
+            ],
           },
           {
-            label: "預訂流程",
-            value: "5 個步驟",
-            copy: "日期、票種、時間、人數與訪客資訊依序完成。",
-          },
-          {
-            label: "行前準備",
-            value: "行動裝置友好",
-            copy: "在手機上也能更清楚地比較並繼續預訂。",
+            planId: "tembo-deck-galleria",
+            label: "更完整的升級路線",
+            summary:
+              "適合希望一次預訂同時擁有 350m 與更高空回廊體驗、提升整體參觀完整度的使用者。",
+            points: [
+              "包含天望甲板 + 天望回廊",
+              "450m 更高視角的城市路線",
+              "更適合想要完整觀景體驗的旅客",
+            ],
           },
         ],
+        offerPanel: {
+          eyebrow: "起步價格",
+          title: "同一流程內即可比較升級方案",
+          priceNote:
+            "先清楚顯示平日成人天望甲板價格，降低購買門檻，再自然引導比較更高階的觀景路線。",
+          bullets: [
+            "付款前即可先選日期與入場時間。",
+            "同一頁面比較 350m 基礎票與 350m + 450m 路線。",
+            "整個結帳流程精簡，手機上也容易完成預訂。",
+          ],
+        },
       },
     },
     steps: ["日期", "票種", "時間", "人數", "訪客"],
@@ -2666,29 +2799,53 @@ content.th = {
       subtitle: "Tembo Deck และ Tembo Galleria",
       promo: {
         eyebrow: "การจองเข้าชม Tokyo Skytree",
-        title: "จองบัตรสำหรับ Tembo Deck และ Tembo Galleria",
+        title: "จองบัตร Tokyo Skytree โดยเริ่มจากราคาที่ตัดสินใจง่ายกว่า",
         description:
-          "เลือกวันที่เข้าชม ประเภทบัตร และช่วงเวลาเข้าชมตามลำดับ เพื่อจองเส้นทางชมวิวหลักของ Tokyo Skytree ได้อย่างชัดเจนทั้งบนเดสก์ท็อปและมือถือ",
+          "เริ่มจาก Tembo Deck ที่ระดับ 350 เมตรก่อน แล้วค่อยอัปเกรดเป็นเส้นทางเต็มที่รวม Tembo Galleria หากต้องการ เลือกวันที่และเวลาเข้าชมก่อนเข้าสู่การชำระเงิน",
+        startingFromLabel: "ราคาเริ่มต้นสำหรับผู้ใหญ่วันธรรมดา",
+        valueBullets: [
+          "ออกแบบให้เริ่มซื้อได้ง่ายสำหรับผู้ใช้ใหม่ที่ต้องการจุดเริ่มต้นราคาต่ำกว่า",
+          "Tembo Deck ครอบคลุมประสบการณ์หลักที่ 350 เมตร พร้อมกระจกพื้นและมุมชมวิวสำคัญ",
+          "หากต้องการประสบการณ์ที่สูงและครบกว่าเดิม สามารถอัปเกรดเป็น Tembo Galleria ได้ในขั้นตอนเดียวกัน",
+        ],
         primaryCta: "จองบัตร",
         secondaryCta: "ดูคู่มือชั้น",
-        trustBadges: ["เริ่มต้น JPY 2,200", "เลือกวันที่และเวลาได้", "มีทั้ง Deck และ Galleria"],
-        highlights: [
+        trustBadges: ["เริ่มต้น JPY 2,200", "Tembo Deck 350m", "อัปเกรด 450m ได้"],
+        planCards: [
           {
-            label: "ตัวเลือกบัตร",
-            value: "2 แพ็กเกจหลัก",
-            copy: "เลือกระหว่าง Tembo Deck แบบเดี่ยว หรือเส้นทางรวม Tembo Galleria",
+            planId: "tembo-deck",
+            label: "จุดเริ่มต้นที่ตัดสินใจง่าย",
+            summary:
+              "เหมาะกับผู้ที่อยากล็อกประสบการณ์ชมวิวหลักของ Tokyo Skytree ก่อน โดยไม่ต้องเริ่มจากตัวเลือกที่ซับซ้อนเกินไป",
+            points: [
+              "จุดชมวิวหลักที่ 350 เมตร",
+              "มีกระจกบานใหญ่และกระจกพื้นเป็นไฮไลต์",
+              "เป็นเส้นทางพื้นฐานที่ตัดสินใจจองได้เร็วที่สุด",
+            ],
           },
           {
-            label: "ขั้นตอนการจอง",
-            value: "5 ขั้นตอน",
-            copy: "วันที่ แพ็กเกจ เวลา จำนวน และข้อมูลผู้เข้าชม",
-          },
-          {
-            label: "การใช้งาน",
-            value: "เหมาะกับมือถือ",
-            copy: "เปรียบเทียบตัวเลือกและจองต่อได้สะดวกบนหน้าจอขนาดเล็ก",
+            planId: "tembo-deck-galleria",
+            label: "เส้นทางอัปเกรดแบบเต็ม",
+            summary:
+              "เหมาะกับผู้ที่อยากได้ทั้งประสบการณ์ 350 เมตรและเส้นทางสูงขึ้นไปอีกใน Tembo Galleria ภายในการจองครั้งเดียว",
+            points: [
+              "รวม Tembo Deck + Tembo Galleria",
+              "เส้นทาง 450 เมตรสำหรับวิวเมืองที่สูงและเต็มกว่า",
+              "เหมาะที่สุดสำหรับคนที่ต้องการประสบการณ์ครบ",
+            ],
           },
         ],
+        offerPanel: {
+          eyebrow: "ราคาเริ่มต้น",
+          title: "อัปเกรดแพ็กเกจได้ในขั้นตอนเดียวกัน",
+          priceNote:
+            "เราแสดงราคาผู้ใหญ่วันธรรมดาของ Tembo Deck ก่อน เพื่อให้เริ่มตัดสินใจซื้อง่ายขึ้น แล้วค่อยเปรียบเทียบเส้นทางที่สูงกว่าได้ทันที",
+          bullets: [
+            "เลือกวันที่และเวลาเข้าชมก่อนชำระเงินได้เลย",
+            "เปรียบเทียบบัตร 350m กับเส้นทาง 350m + 450m ในหน้าเดียว",
+            "ขั้นตอนเช็กเอาต์สั้นและใช้งานบนมือถือได้สะดวก",
+          ],
+        },
       },
     },
     steps: ["วันที่", "แพ็กเกจ", "เวลา", "จำนวน", "ผู้เข้าชม"],

@@ -1,9 +1,12 @@
 import type { Locale } from "@/lib/i18n";
 
-const fallbackSiteUrl = "https://www.tokyo-skytree.example.com";
+export const siteBrand = "Skytree Tickets";
+export const venueName = "Tokyo Skytree";
+export const primarySiteUrl = "https://skytree-tickets.com";
+export const secondarySiteUrl = "https://tokyo.skytree-tickets.com";
 
 function normalizeSiteUrl(value?: string) {
-  if (!value) return fallbackSiteUrl;
+  if (!value) return primarySiteUrl;
   return value.replace(/\/+$/, "");
 }
 
@@ -23,63 +26,63 @@ export const layoutMetadata: Record<
   }
 > = {
   en: {
-    defaultTitle: "TOKYO SKYTREE | Official Tickets & Information",
-    template: "%s | Tokyo Skytree",
+    defaultTitle: "Skytree Tickets | Tokyo Skytree tickets and visitor guide",
+    template: "%s | Skytree Tickets",
     description:
-      "Tokyo Skytree is the tallest tower in Japan at 634 meters. Book tickets for the Tembo Deck and Tembo Galleria, and explore panoramic views, dining, and seasonal events.",
-    ogAlt: "Tokyo Skytree panoramic view",
+      "Book Tokyo Skytree tickets, compare Tembo Deck and Tembo Galleria options, and plan your visit with floor guides, access details, events, and FAQs on Skytree Tickets.",
+    ogAlt: "Tokyo Skytree skyline view from the observatory",
     localeTag: "en_US",
     jsonLdDescription:
-      "Tokyo Skytree is a broadcasting and observation tower at 634 meters, the tallest tower in Japan and one of the tallest structures in the world.",
+      "Skytree Tickets is an independent booking and visitor-planning website for Tokyo Skytree, helping guests compare ticket options, opening hours, access information, and seasonal highlights.",
   },
   ja: {
-    defaultTitle: "TOKYO SKYTREE | 公式チケット・施設案内",
-    template: "%s | TOKYO SKYTREE",
+    defaultTitle: "Skytree Tickets | 東京スカイツリーのチケット予約と来場ガイド",
+    template: "%s | Skytree Tickets",
     description:
-      "東京スカイツリーは高さ634メートル、日本一高いタワーです。天望デッキや天望回廊のチケット、眺望、グルメ、季節イベント情報をまとめて確認できます。",
-    ogAlt: "東京スカイツリーのパノラマビュー",
+      "Skytree Ticketsでは、東京スカイツリーのチケット比較、天望デッキと天望回廊の入場情報、フロア案内、アクセス、イベント、FAQをまとめて確認できます。",
+    ogAlt: "東京スカイツリー展望台からの景色",
     localeTag: "ja_JP",
     jsonLdDescription:
-      "東京スカイツリーは高さ634メートルの電波塔・展望施設で、日本一高いタワーとして東京の景観と観光体験を支えています。",
+      "Skytree Ticketsは、東京スカイツリー来場者向けの独立系チケット予約・訪問計画サイトです。券種比較、営業時間、アクセス、イベント情報をわかりやすく案内します。",
   },
   ko: {
-    defaultTitle: "TOKYO SKYTREE | 공식 티켓 및 이용 안내",
-    template: "%s | TOKYO SKYTREE",
+    defaultTitle: "Skytree Tickets | 도쿄 스카이트리 티켓 예약 및 방문 가이드",
+    template: "%s | Skytree Tickets",
     description:
-      "도쿄 스카이트리는 높이 634미터의 일본 최고 타워입니다. 템보 데크와 템보 갤러리아 티켓, 전망, 다이닝, 시즌 이벤트 정보를 한곳에서 확인하세요.",
-    ogAlt: "도쿄 스카이트리 파노라마 전망",
+      "Skytree Tickets에서 도쿄 스카이트리 입장권, 템보 데크 및 템보 갤러리아 옵션, 층별 안내, 교통, 이벤트, FAQ를 한눈에 확인하세요.",
+    ogAlt: "도쿄 스카이트리 전망대 파노라마 뷰",
     localeTag: "ko_KR",
     jsonLdDescription:
-      "도쿄 스카이트리는 높이 634미터의 전파·전망 타워로, 일본에서 가장 높은 타워이자 도쿄를 대표하는 전망 명소입니다.",
+      "Skytree Tickets는 도쿄 스카이트리 방문객을 위한 독립형 예약 및 방문 안내 사이트로, 티켓 옵션과 방문 계획 정보를 쉽게 제공합니다.",
   },
   "zh-CN": {
-    defaultTitle: "TOKYO SKYTREE | 官方门票与设施信息",
-    template: "%s | TOKYO SKYTREE",
+    defaultTitle: "Skytree Tickets | 东京晴空塔门票预订与参观指南",
+    template: "%s | Skytree Tickets",
     description:
-      "东京晴空塔高 634 米，是日本最高的塔。可在此查看天望甲板与天望回廊门票、观景、餐饮与季节活动信息。",
-    ogAlt: "东京晴空塔全景视野",
+      "通过 Skytree Tickets 预览东京晴空塔门票方案，对比天望甲板与天望回廊，查看楼层指南、交通方式、活动资讯与常见问题。",
+    ogAlt: "东京晴空塔观景台城市全景",
     localeTag: "zh_CN",
     jsonLdDescription:
-      "东京晴空塔是一座高 634 米的广播与观景塔，是日本最高的塔，也是东京最具代表性的地标之一。",
+      "Skytree Tickets 是面向东京晴空塔访客的独立门票预订与行程规划网站，提供票种比较、开放时间、交通信息与活动内容。",
   },
   "zh-TW": {
-    defaultTitle: "TOKYO SKYTREE | 官方門票與設施資訊",
-    template: "%s | TOKYO SKYTREE",
+    defaultTitle: "Skytree Tickets | 東京晴空塔門票預訂與參觀指南",
+    template: "%s | Skytree Tickets",
     description:
-      "東京晴空塔高 634 公尺，是日本最高的塔。可在此查看天望甲板與天望回廊門票、觀景、餐飲與季節活動資訊。",
-    ogAlt: "東京晴空塔全景視野",
+      "透過 Skytree Tickets 比較東京晴空塔票種、查看天望甲板與天望回廊資訊，並快速掌握樓層導覽、交通方式、活動與常見問題。",
+    ogAlt: "東京晴空塔觀景台城市全景",
     localeTag: "zh_TW",
     jsonLdDescription:
-      "東京晴空塔是一座高 634 公尺的廣播與觀景塔，是日本最高的塔，也是東京最具代表性的地標之一。",
+      "Skytree Tickets 是為東京晴空塔訪客打造的獨立預訂與行程規劃網站，提供票券比較、營業資訊、交通與活動內容。",
   },
   th: {
-    defaultTitle: "TOKYO SKYTREE | ข้อมูลตั๋วและการเข้าชมอย่างเป็นทางการ",
-    template: "%s | TOKYO SKYTREE",
+    defaultTitle: "Skytree Tickets | จองบัตร Tokyo Skytree และคู่มือการเข้าชม",
+    template: "%s | Skytree Tickets",
     description:
-      "Tokyo Skytree สูง 634 เมตรและเป็นหอคอยที่สูงที่สุดในญี่ปุ่น ตรวจสอบบัตรเข้าชม Tembo Deck และ Tembo Galleria รวมถึงข้อมูลวิว ร้านอาหาร และอีเวนต์ตามฤดูกาลได้ที่นี่",
-    ogAlt: "วิวพาโนรามาของ Tokyo Skytree",
+      "Skytree Tickets ช่วยให้คุณเปรียบเทียบบัตร Tokyo Skytree ดูข้อมูล Tembo Deck และ Tembo Galleria พร้อมคู่มือชั้น การเดินทาง อีเวนต์ และ FAQ ในที่เดียว",
+    ogAlt: "วิวพาโนรามาจากจุดชมวิว Tokyo Skytree",
     localeTag: "th_TH",
     jsonLdDescription:
-      "Tokyo Skytree เป็นหอส่งสัญญาณและหอชมวิวสูง 634 เมตร สูงที่สุดในญี่ปุ่น และเป็นหนึ่งในแลนด์มาร์กสำคัญของกรุงโตเกียว",
+      "Skytree Tickets เป็นเว็บไซต์อิสระสำหรับการจองบัตรและวางแผนการเที่ยว Tokyo Skytree โดยรวมข้อมูลบัตร เวลาเปิดทำการ การเดินทาง และไฮไลต์ตามฤดูกาลไว้ในที่เดียว",
   },
 };

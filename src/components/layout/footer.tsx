@@ -134,6 +134,9 @@ export function Footer() {
         <p className="text-center text-xs text-skytree-gray">
           {copy.footer.copyright}
         </p>
+        <p className="mx-auto mt-2 max-w-3xl text-center text-[11px] leading-5 text-skytree-gray">
+          {copy.footer.disclaimer}
+        </p>
       </div>
     </footer>
   );

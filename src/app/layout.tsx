@@ -6,7 +6,12 @@ import { Header } from "@/components/layout/header";
 import { LocaleProvider } from "@/components/layout/locale-provider";
 import { normalizeLocale } from "@/lib/i18n";
 import { getRequestLocale } from "@/lib/server-locale";
-import { layoutMetadata, siteUrl } from "@/lib/site-metadata";
+import {
+  layoutMetadata,
+  siteBrand,
+  siteUrl,
+  venueName,
+} from "@/lib/site-metadata";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = normalizeLocale(await getRequestLocale());
@@ -17,35 +22,33 @@ export async function generateMetadata(): Promise<Metadata> {
       default: copy.defaultTitle,
       template: copy.template,
     },
+    applicationName: siteBrand,
     description: copy.description,
     keywords: [
-      "Tokyo Skytree",
+      "Tokyo Skytree tickets",
+      "Tokyo Skytree booking",
+      "Tembo Deck tickets",
+      "Tembo Galleria tickets",
+      "Tokyo Skytree floor guide",
+      "Tokyo Skytree opening hours",
+      "Tokyo Skytree access",
       "Tokyo observation deck",
-      "Tembo Deck",
-      "Tembo Galleria",
-      "Tokyo tourist attraction",
-      "Tokyo skyline",
-      "Japan travel",
-      "Tokyo tickets",
-      "Tokyo sightseeing",
-      "Sumida Tokyo",
-      "Tokyo tower",
-      "Japan landmark",
+      "Tokyo skyline attraction",
+      "Sumida Tokyo travel",
+      "Skytree visitor guide",
+      "Skytree Tickets",
     ],
-    authors: [{ name: "Tokyo Skytree" }],
-    creator: "Tokyo Skytree",
-    publisher: "Tokyo Skytree",
+    authors: [{ name: siteBrand }],
+    creator: siteBrand,
+    publisher: siteBrand,
     metadataBase: new URL(siteUrl),
-    alternates: {
-      canonical: "/",
-    },
     openGraph: {
       type: "website",
       locale: copy.localeTag,
       url: siteUrl,
       title: copy.defaultTitle,
       description: copy.description,
-      siteName: "Tokyo Skytree",
+      siteName: siteBrand,
       images: [
         {
           url: "/images/hero/img_kv01.webp",
@@ -93,38 +96,34 @@ export default async function RootLayout({
   const copy = layoutMetadata[locale];
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "TouristAttraction",
-    name: "Tokyo Skytree",
-    description: copy.jsonLdDescription,
+    "@type": "WebSite",
+    name: siteBrand,
     url: siteUrl,
-    telephone: "+81-3-5302-3470",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "1-1-2 Oshiage",
-      addressLocality: "Sumida-ku",
-      addressRegion: "Tokyo",
-      postalCode: "131-0045",
-      addressCountry: "JP",
+    description: copy.jsonLdDescription,
+    inLanguage: locale,
+    publisher: {
+      "@type": "Organization",
+      name: siteBrand,
+      url: siteUrl,
     },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: 35.7101,
-      longitude: 139.8107,
+    about: {
+      "@type": "TouristAttraction",
+      name: venueName,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "1-1-2 Oshiage",
+        addressLocality: "Sumida-ku",
+        addressRegion: "Tokyo",
+        postalCode: "131-0045",
+        addressCountry: "JP",
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: 35.7101,
+        longitude: 139.8107,
+      },
+      image: `${siteUrl}/images/hero/img_kv01.webp`,
     },
-    openingHoursSpecification: {
-      "@type": "OpeningHoursSpecification",
-      opens: "08:00",
-      closes: "21:00",
-    },
-    isAccessibleForFree: false,
-    priceRange: "JPY",
-    image: `${siteUrl}/images/hero/img_kv01.webp`,
-    sameAs: [
-      "https://twitter.com/skytreeofficial",
-      "https://instagram.com/tokyoskytree_global",
-      "https://facebook.com/tokyo.skytree",
-      "https://youtube.com/@tokyoskytree",
-    ],
   };
 
   return (

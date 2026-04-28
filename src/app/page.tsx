@@ -15,6 +15,9 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: hero.title,
     description: hero.description,
+    alternates: {
+      canonical: "/",
+    },
   };
 }
 

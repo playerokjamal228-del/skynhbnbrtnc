@@ -37,6 +37,7 @@ interface ShellCopy {
     groupReservations: string;
     partners: string;
     copyright: string;
+    disclaimer: string;
   };
   quickAccess: Record<string, string>;
 }
@@ -60,15 +61,17 @@ const shellCopy: Record<Locale, ShellCopy> = {
       toggleMenu: "メニューを切り替える",
     },
     footer: {
-      visit: "訪問案内",
+      visit: "来場情報",
       enjoy: "楽しむ",
-      info: "情報",
-      about: "概要",
+      info: "案内",
+      about: "サイト情報",
       nightViews: "夜景",
       accessibility: "バリアフリー",
-      groupReservations: "団体予約",
-      partners: "公式パートナー",
-      copyright: "© TOKYO SKYTREE. All Rights Reserved.",
+      groupReservations: "団体案内",
+      partners: "来場計画の参考情報",
+      copyright: "© Skytree Tickets. All Rights Reserved.",
+      disclaimer:
+        "Skytree Tickets は東京スカイツリー来場者向けの独立系予約・案内サイトです。公式施設運営者のコーポレートサイトではありません。",
     },
     quickAccess: {
       "/ticket": "チケット",
@@ -102,12 +105,14 @@ const shellCopy: Record<Locale, ShellCopy> = {
       visit: "Visit",
       enjoy: "Enjoy",
       info: "Info",
-      about: "About",
+      about: "Site",
       nightViews: "Night Views",
       accessibility: "Accessibility",
       groupReservations: "Group Reservations",
-      partners: "Official Partners",
-      copyright: "© TOKYO SKYTREE. All Rights Reserved.",
+      partners: "Planning References",
+      copyright: "© Skytree Tickets. All Rights Reserved.",
+      disclaimer:
+        "Skytree Tickets is an independent visitor booking and planning website for Tokyo Skytree and is not the corporate website of the venue operator.",
     },
     quickAccess: {
       "/ticket": "Tickets",
@@ -141,12 +146,14 @@ const shellCopy: Record<Locale, ShellCopy> = {
       visit: "방문 안내",
       enjoy: "즐기기",
       info: "정보",
-      about: "소개",
+      about: "사이트 정보",
       nightViews: "야경",
       accessibility: "배리어프리",
-      groupReservations: "단체 예약",
-      partners: "공식 파트너",
-      copyright: "© TOKYO SKYTREE. All Rights Reserved.",
+      groupReservations: "단체 안내",
+      partners: "방문 계획 참고 정보",
+      copyright: "© Skytree Tickets. All Rights Reserved.",
+      disclaimer:
+        "Skytree Tickets는 도쿄 스카이트리 방문객을 위한 독립형 예약·안내 사이트이며, 시설 운영사의 공식 기업 웹사이트가 아닙니다.",
     },
     quickAccess: {
       "/ticket": "티켓",
@@ -180,12 +187,14 @@ const shellCopy: Record<Locale, ShellCopy> = {
       visit: "参观",
       enjoy: "游玩",
       info: "信息",
-      about: "关于",
+      about: "网站信息",
       nightViews: "夜景",
       accessibility: "无障碍设施",
-      groupReservations: "团体预约",
-      partners: "官方合作伙伴",
-      copyright: "© TOKYO SKYTREE. All Rights Reserved.",
+      groupReservations: "团体说明",
+      partners: "行程参考信息",
+      copyright: "© Skytree Tickets. All Rights Reserved.",
+      disclaimer:
+        "Skytree Tickets 是面向东京晴空塔访客的独立预订与行程规划网站，并非场馆运营方的企业官方网站。",
     },
     quickAccess: {
       "/ticket": "门票",
@@ -219,12 +228,14 @@ const shellCopy: Record<Locale, ShellCopy> = {
       visit: "參觀",
       enjoy: "遊玩",
       info: "資訊",
-      about: "關於",
+      about: "網站資訊",
       nightViews: "夜景",
       accessibility: "無障礙設施",
-      groupReservations: "團體預約",
-      partners: "官方合作夥伴",
-      copyright: "© TOKYO SKYTREE. All Rights Reserved.",
+      groupReservations: "團體說明",
+      partners: "行程參考資訊",
+      copyright: "© Skytree Tickets. All Rights Reserved.",
+      disclaimer:
+        "Skytree Tickets 是為東京晴空塔訪客打造的獨立預訂與行程規劃網站，並非場館營運方的企業官方網站。",
     },
     quickAccess: {
       "/ticket": "門票",
@@ -258,12 +269,14 @@ const shellCopy: Record<Locale, ShellCopy> = {
       visit: "การเข้าชม",
       enjoy: "การเที่ยวชม",
       info: "ข้อมูล",
-      about: "เกี่ยวกับ",
+      about: "ข้อมูลเว็บไซต์",
       nightViews: "วิวกลางคืน",
       accessibility: "การเข้าถึง",
-      groupReservations: "การจองแบบหมู่คณะ",
-      partners: "พันธมิตรอย่างเป็นทางการ",
-      copyright: "© TOKYO SKYTREE. All Rights Reserved.",
+      groupReservations: "ข้อมูลกลุ่ม",
+      partners: "ข้อมูลอ้างอิงสำหรับการวางแผน",
+      copyright: "© Skytree Tickets. All Rights Reserved.",
+      disclaimer:
+        "Skytree Tickets เป็นเว็บไซต์อิสระสำหรับการจองและวางแผนเที่ยว Tokyo Skytree และไม่ใช่เว็บไซต์องค์กรทางการของผู้ดำเนินการสถานที่",
     },
     quickAccess: {
       "/ticket": "บัตรเข้าชม",
