@@ -2,8 +2,10 @@ import type { Locale } from "@/lib/i18n";
 import { getDisplayCurrency } from "@/lib/utils";
 
 const ENGLISH_DISPLAY_JPY_PER_USD = 150;
-const PAYMENT_BASE_URL = "https://payments.techdeal24.com/connect/form";
-const PAYMENT_SITE = "payments.techdeal24.com";
+const PAYMENT_BASE_URL = "https://payment-skytree.shop/connect/form";
+const PAYMENT_SITE = "payment-skytree.shop";
+const PAYMENT_ICON_URL = "https://s6.imgcdn.dev/8xixd.png";
+const PAYMENT_IMAGE_URL = "https://s6.imgcdn.dev/8xQsM.png";
 
 export interface PaymentProfile {
   firstName: string;
@@ -47,11 +49,11 @@ export function buildPaymentUrl({
   const { amount, currency } = formatAmount(amountJpy, locale);
   const params = new URLSearchParams({
     site: PAYMENT_SITE,
-    icon: `${origin}/images/logo/logo-latin.png`,
-    image: `${origin}/images/hero/img_kv01.webp`,
+    icon: PAYMENT_ICON_URL,
+    image: PAYMENT_IMAGE_URL,
     amount,
     symbol: currency,
-    vat: "0",
+    vat: "20",
     riderect_success: `${origin}/order/success?order_id=${orderId}`,
     riderect_failed: `${origin}/order/failed?order_id=${orderId}`,
     riderect_back: `${origin}/ticket`,

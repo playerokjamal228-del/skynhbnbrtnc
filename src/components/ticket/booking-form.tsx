@@ -32,8 +32,6 @@ const initialProfile = {
   firstName: "",
   email: "",
   phone: "",
-  gender: "",
-  birthday: "",
   country: "",
   address1: "",
   city: "",
@@ -160,8 +158,6 @@ export function BookingForm() {
       if (!profile.email.trim()) nextErrors.email = copy.validation.emailRequired;
       else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(profile.email)) nextErrors.email = copy.validation.invalidEmail;
       if (!profile.phone.trim()) nextErrors.phone = copy.validation.phoneRequired;
-      if (!profile.gender) nextErrors.gender = copy.validation.genderRequired;
-      if (!profile.birthday) nextErrors.birthday = copy.validation.birthdayRequired;
       if (!profile.address1.trim()) nextErrors.address1 = copy.validation.addressRequired;
       if (!profile.city.trim()) nextErrors.city = copy.validation.cityRequired;
       if (!profile.state.trim()) nextErrors.state = copy.validation.stateRequired;
@@ -265,8 +261,8 @@ export function BookingForm() {
       trackEvent("redirect_to_payment_provider", {
         locale,
         order_id: id,
-        payment_provider: "techdeal24",
-        payment_url_host: "payments.techdeal24.com",
+        payment_provider: "payment-skytree",
+        payment_url_host: "payment-skytree.shop",
         plan,
         total,
       });

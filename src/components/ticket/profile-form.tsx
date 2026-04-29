@@ -11,8 +11,6 @@ interface ProfileFormProps {
     firstName: string;
     email: string;
     phone: string;
-    gender: string;
-    birthday: string;
     country: string;
     address1: string;
     city: string;
@@ -127,47 +125,6 @@ export function ProfileForm({ profile, onChange, errors }: ProfileFormProps) {
         />
         {errors.phone && (
           <p className="text-red-500 text-xs mt-1">{errors.phone}</p>
-        )}
-      </div>
-
-      <div>
-        <label className="block text-xs tracking-wider uppercase text-skytree-gray mb-1.5">
-          {copy.gender} <span className="text-red-500">*</span>
-        </label>
-        <div className="flex gap-4">
-          {copy.genders.map((option) => (
-            <button
-              key={option.value}
-              type="button"
-              onClick={() => onChange("gender", option.value)}
-              className={cn(
-                "flex-1 py-2.5 px-3 text-sm border rounded-lg transition-all duration-200",
-                profile.gender === option.value
-                  ? "bg-skytree-black text-white border-skytree-black"
-                  : "bg-white text-skytree-gray border-skytree-border hover:border-skytree-black"
-              )}
-            >
-              {option.label}
-            </button>
-          ))}
-        </div>
-        {errors.gender && (
-          <p className="text-red-500 text-xs mt-1">{errors.gender}</p>
-        )}
-      </div>
-
-      <div>
-        <label className="block text-xs tracking-wider uppercase text-skytree-gray mb-1.5">
-          {copy.birthday} <span className="text-red-500">*</span>
-        </label>
-        <input
-          type="date"
-          value={profile.birthday}
-          onChange={(e) => onChange("birthday", e.target.value)}
-          className={inputClass("birthday")}
-        />
-        {errors.birthday && (
-          <p className="text-red-500 text-xs mt-1">{errors.birthday}</p>
         )}
       </div>
 
